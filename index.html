@@ -14,7 +14,7 @@
             color: #fff;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto; /* Permite desplazarse hacia abajo */
         }
         body::before {
             content: "";
@@ -22,7 +22,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: url('https://i.imgur.com/hyO5b1l.png') repeat;
-            opacity: 0.1;
+            opacity: 0.05; /* Hacemos el fondo más transparente */
             z-index: -1;
         }
         h1 {
@@ -45,6 +45,7 @@
             gap: 20px;
             width: 100%;
             max-width: 800px;
+            margin-top: 20px; /* Espacio entre las imágenes y el título */
         }
         .photo-container {
             position: relative;
