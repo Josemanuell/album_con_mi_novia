@@ -10,20 +10,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #000;
+            background-color: #000; /* Fondo negro */
             color: #fff;
             padding: 20px;
             position: relative;
-            overflow: hidden;
-        }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: url('https://i.imgur.com/hyO5b1l.png') repeat;
-            opacity: 0.1;
-            z-index: -1;
+            min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+            overflow-y: auto; /* Permite desplazarse hacia abajo si el contenido es largo */
         }
         h1 {
             color: #ff69b4;
@@ -39,12 +31,26 @@
         h1::after {
             content: " ❤️";
         }
-        #gallery, #second-gallery {
+        #fileInput {
+            margin-bottom: 20px; /* Añadir margen para separar el botón de las imágenes */
+            padding: 10px;
+            background-color: #ff69b4;
+            border: 2px solid #ff4d83; /* Contorno del botón */
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #fileInput:hover {
+            background-color: #ff4d83; /* Cambia el color de fondo cuando pasa el mouse */
+        }
+        #gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Asegura que las imágenes se ajusten bien */
             gap: 10px;
             width: 100%;
             max-width: 800px;
+            margin-top: 20px; /* Espacio entre las imágenes y el título */
         }
         .photo-container {
             position: relative;
@@ -52,107 +58,173 @@
             border-radius: 12px;
             padding: 0;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .photo {
             width: 100%;
             height: auto;
+            max-width: 120px; /* Limitar el tamaño máximo de la imagen */
             border-radius: 0;
         }
-        button {
-            margin: 20px;
-            padding: 10px 20px;
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background-color: #ff69b4;
-            color: white;
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            border-radius: 50%;
+            padding: 5px 10px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #ff4777;
+        .delete-btn:hover {
+            background-color: #ff4d83;
         }
-        input {
-            padding: 10px;
-            border-radius: 5px;
+        #message {
+            margin-top: 50px;
+            padding: 20px;
+            text-align: center;
+            background-color: #ffdde1;
+            border-radius: 10px;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
             border: 2px solid #ff69b4;
-            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
+        }
+        #photos-title {
+            margin-top: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff69b4;
+            margin-bottom: 10px;
+        }
+        #fileInput2 {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #ff69b4;
+            border: 2px solid #ff4d83;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #fileInput2:hover {
+            background-color: #ff4d83;
+        }
+        /* Separación de fotos en la segunda sección */
+        #gallery2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+            margin-top: 20px; /* Espacio entre el botón y las fotos */
         }
     </style>
 </head>
 <body>
     <h1>M ❤️ K 12-04-2024</h1>
+    <input type="file" id="fileInput" accept="image/*" multiple>
     <div id="gallery"></div>
 
-    <h2>Fotos tuyas y mías</h2>
-    <div id="second-gallery"></div>
+    <div id="message">
+        Amor, cada día a tu lado me recuerda lo afortunado que soy de tenerte en mi vida. Tu amor, tu apoyo y tu presencia hacen que todo sea más hermoso. Te amo más de lo que las palabras pueden expresar, y me siento agradecido por cada momento que compartimos. Eres mi razón de sonreír y mi inspiración constante. Siempre estaré a tu lado, hoy y siempre.  TE AMO MI CHAPARRITA💖
+    </div>
 
-    <h3>Agregar nuevas fotos</h3>
-    <input type="text" id="imgUrlInput" placeholder="Introduce la URL de la foto">
-    <button onclick="addImage()">Agregar Foto</button>
+    <!-- Título y botón para "FOTOS TUYAS Y MIAS" -->
+    <div id="photos-title">FOTOS TUYAS Y MIAS SOLOS</div>
+    <input type="file" id="fileInput2" accept="image/*" multiple>
+    <!-- Separación entre el botón y la galería de imágenes -->
+    <div id="gallery2"></div>
 
     <script>
-        // URLs para las fotos en la primera sección (fotos juntas)
-        const firstSectionImages = [
-            "https://imgur.com/Q5sIARB",
-            "https://imgur.com/S6nGHPK",
-            "https://imgur.com/YODCP4t",
-            "https://imgur.com/KkRNJwN",
-            "https://imgur.com/KrTax9O",
-            "https://imgur.com/zubECoZ",
-            "https://imgur.com/J2BjxOG",
-            "https://imgur.com/DNYV7OO",
-            "https://imgur.com/qfFrgqy",
-            "https://imgur.com/tHFwB5J",
-            "https://imgur.com/9Ea2vOR",
-            "https://imgur.com/L1ZXSab"
-        ];
+        const fileInput = document.getElementById('fileInput');
+        const gallery = document.getElementById('gallery');
 
-        // URLs para las fotos en la segunda sección (tuyas y mías solos)
-        const secondSectionImages = [
-            "https://imgur.com/Y6Q3Yk4",
-            "https://imgur.com/WG2CNTv",
-            "https://imgur.com/TLQr5MD",
-            "https://imgur.com/Ia0BoTg",
-            "https://imgur.com/S2QOQUV",
-            "https://imgur.com/PHa0iDn",
-            "https://imgur.com/ix2SQMI",
-            "https://imgur.com/zZYddF2",
-            "https://imgur.com/G9Pjkg4",
-            "https://imgur.com/LTSE1z9",
-            "https://imgur.com/FGGilxb",
-            "https://imgur.com/zh0Mr25",
-            "https://imgur.com/yi0wweb",
-            "https://imgur.com/mjEvxrc",
-            "https://imgur.com/8yZdV7S",
-            "https://imgur.com/N6xj5Hh"
-        ];
+        const fileInput2 = document.getElementById('fileInput2');
+        const gallery2 = document.getElementById('gallery2');
 
-        // Función para agregar una imagen a la galería
-        function addImageToGallery(src, galleryId) {
-            const gallery = document.getElementById(galleryId);
+        // Cargar imágenes guardadas
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+            savedImages.forEach((src, index) => addImageToGallery(src, index, gallery));
+
+            const savedImages2 = JSON.parse(localStorage.getItem('savedImages2')) || [];
+            savedImages2.forEach((src, index) => addImageToGallery(src, index, gallery2));
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+
+            for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgSrc = e.target.result;
+                    savedImages.push(imgSrc);
+                    localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                    addImageToGallery(imgSrc, savedImages.length - 1, gallery);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        fileInput2.addEventListener('change', (event) => {
+            const files = event.target.files;
+            const savedImages2 = JSON.parse(localStorage.getItem('savedImages2')) || [];
+
+            for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgSrc = e.target.result;
+                    savedImages2.push(imgSrc);
+                    localStorage.setItem('savedImages2', JSON.stringify(savedImages2));
+                    addImageToGallery(imgSrc, savedImages2.length - 1, gallery2);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function addImageToGallery(src, index, gallery) {
             const container = document.createElement('div');
             container.className = 'photo-container';
             const img = document.createElement('img');
             img.src = src;
             img.className = 'photo';
+
+            // Crear botón para eliminar imagen
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerText = 'X';
+            deleteBtn.onclick = () => removeImage(index, gallery);
+
             container.appendChild(img);
+            container.appendChild(deleteBtn);
             gallery.appendChild(container);
         }
 
-        // Agregar las imágenes iniciales
-        window.onload = function() {
-            firstSectionImages.forEach(src => addImageToGallery(src, 'gallery'));
-            secondSectionImages.forEach(src => addImageToGallery(src, 'second-gallery'));
-        };
+        function removeImage(index, gallery) {
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+            const savedImages2 = JSON.parse(localStorage.getItem('savedImages2')) || [];
 
-        // Función para agregar una nueva imagen
-        function addImage() {
-            const imgUrl = document.getElementById('imgUrlInput').value;
-
-            if (imgUrl) {
-                addImageToGallery(imgUrl, 'second-gallery'); // Añadir a la segunda galería
-                document.getElementById('imgUrlInput').value = ''; // Limpiar el input
+            if (gallery === this.gallery) {
+                savedImages.splice(index, 1);
+                localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                gallery.innerHTML = '';
+                savedImages.forEach((src, idx) => addImageToGallery(src, idx, gallery));
+            } else {
+                savedImages2.splice(index, 1);
+                localStorage.setItem('savedImages2', JSON.stringify(savedImages2));
+                gallery.innerHTML = '';
+                savedImages2.forEach((src, idx) => addImageToGallery(src, idx, gallery));
             }
         }
     </script>
+
 </body>
 </html>
