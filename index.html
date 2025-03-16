@@ -130,7 +130,20 @@
 <body>
     <h1>M ❤️ K 12-04-2024</h1>
     <input type="file" id="fileInput" accept="image/*" multiple>
-    <div id="gallery"></div>
+    <div id="gallery">
+        <!-- Enlaces de imágenes de la primera sección -->
+        <a href="https://imgur.com/Q5sIARB"><img src="https://i.imgur.com/Q5sIARB.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/S6nGHPK"><img src="https://i.imgur.com/S6nGHPK.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/YODCP4t"><img src="https://i.imgur.com/YODCP4t.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/KkRNJwN"><img src="https://i.imgur.com/KkRNJwN.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/KrTax9O"><img src="https://i.imgur.com/KrTax9O.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/zubECoZ"><img src="https://i.imgur.com/zubECoZ.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/DNYV7OO"><img src="https://i.imgur.com/DNYV7OO.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/qfFrgqy"><img src="https://i.imgur.com/qfFrgqy.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/J2BjxOG"><img src="https://i.imgur.com/J2BjxOG.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/tHFwB5J"><img src="https://i.imgur.com/tHFwB5J.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/L1ZXSab"><img src="https://i.imgur.com/L1ZXSab.jpg" title="source: imgur.com" /></a>
+    </div>
 
     <div id="message">
         Amor, cada día a tu lado me recuerda lo afortunado que soy de tenerte en mi vida. Tu amor, tu apoyo y tu presencia hacen que todo sea más hermoso. Te amo más de lo que las palabras pueden expresar, y me siento agradecido por cada momento que compartimos. Eres mi razón de sonreír y mi inspiración constante. Siempre estaré a tu lado, hoy y siempre.  TE AMO MI CHAPARRITA💖
@@ -140,7 +153,22 @@
     <div id="photos-title">FOTOS TUYAS Y MIAS SOLOS</div>
     <input type="file" id="fileInput2" accept="image/*" multiple>
     <!-- Separación entre el botón y la galería de imágenes -->
-    <div id="gallery2"></div>
+    <div id="gallery2">
+        <!-- Enlaces de imágenes de la segunda sección -->
+        <a href="https://imgur.com/Y6Q3Yk4"><img src="https://i.imgur.com/Y6Q3Yk4.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/TLQr5MD"><img src="https://i.imgur.com/TLQr5MD.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/S2QOQUV"><img src="https://i.imgur.com/S2QOQUV.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/Ia0BoTg"><img src="https://i.imgur.com/Ia0BoTg.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/cVbisWu"><img src="https://i.imgur.com/cVbisWu.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/ix2SQMI"><img src="https://i.imgur.com/ix2SQMI.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/FGGilxb"><img src="https://i.imgur.com/FGGilxb.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/dPPlck3"><img src="https://i.imgur.com/dPPlck3.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/8yZdV7S"><img src="https://i.imgur.com/8yZdV7S.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/zh0Mr25"><img src="https://i.imgur.com/zh0Mr25.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/Vu7Twcm"><img src="https://i.imgur.com/Vu7Twcm.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/N6xj5Hh"><img src="https://i.imgur.com/N6xj5Hh.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/U5kRfUv"><img src="https://i.imgur.com/U5kRfUv.jpg" title="source: imgur.com" /></a>
+    </div>
 
     <script>
         const fileInput = document.getElementById('fileInput');
@@ -158,73 +186,71 @@
             savedImages2.forEach((src, index) => addImageToGallery(src, index, gallery2));
         });
 
-        fileInput.addEventListener('change', (event) => {
+        // Manejo de la carga de imágenes
+        fileInput.addEventListener('change', handleFileSelect);
+        fileInput2.addEventListener('change', handleFileSelect2);
+
+        function handleFileSelect(event) {
             const files = event.target.files;
-            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-
-            for (const file of files) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgSrc = e.target.result;
-                    savedImages.push(imgSrc);
-                    localStorage.setItem('savedImages', JSON.stringify(savedImages));
-                    addImageToGallery(imgSrc, savedImages.length - 1, gallery);
-                };
-                reader.readAsDataURL(file);
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        addImageToGallery(e.target.result, gallery.children.length, gallery);
+                        saveImageToLocalStorage(e.target.result, 'savedImages');
+                    };
+                    reader.readAsDataURL(file);
+                }
             }
-        });
+        }
 
-        fileInput2.addEventListener('change', (event) => {
+        function handleFileSelect2(event) {
             const files = event.target.files;
-            const savedImages2 = JSON.parse(localStorage.getItem('savedImages2')) || [];
-
-            for (const file of files) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const imgSrc = e.target.result;
-                    savedImages2.push(imgSrc);
-                    localStorage.setItem('savedImages2', JSON.stringify(savedImages2));
-                    addImageToGallery(imgSrc, savedImages2.length - 1, gallery2);
-                };
-                reader.readAsDataURL(file);
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        addImageToGallery(e.target.result, gallery2.children.length, gallery2);
+                        saveImageToLocalStorage(e.target.result, 'savedImages2');
+                    };
+                    reader.readAsDataURL(file);
+                }
             }
-        });
+        }
 
-        function addImageToGallery(src, index, gallery) {
+        function addImageToGallery(src, index, galleryElement) {
             const container = document.createElement('div');
-            container.className = 'photo-container';
+            container.classList.add('photo-container');
             const img = document.createElement('img');
             img.src = src;
-            img.className = 'photo';
-
-            // Crear botón para eliminar imagen
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-btn';
-            deleteBtn.innerText = 'X';
-            deleteBtn.onclick = () => removeImage(index, gallery);
-
+            img.classList.add('photo');
             container.appendChild(img);
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = '❌';
+            deleteBtn.classList.add('delete-btn');
+            deleteBtn.onclick = function () {
+                galleryElement.removeChild(container);
+                removeImageFromLocalStorage(src, 'savedImages');
+            };
             container.appendChild(deleteBtn);
-            gallery.appendChild(container);
+
+            galleryElement.appendChild(container);
         }
 
-        function removeImage(index, gallery) {
-            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-            const savedImages2 = JSON.parse(localStorage.getItem('savedImages2')) || [];
+        function saveImageToLocalStorage(imageSrc, storageKey) {
+            const savedImages = JSON.parse(localStorage.getItem(storageKey)) || [];
+            savedImages.push(imageSrc);
+            localStorage.setItem(storageKey, JSON.stringify(savedImages));
+        }
 
-            if (gallery === this.gallery) {
-                savedImages.splice(index, 1);
-                localStorage.setItem('savedImages', JSON.stringify(savedImages));
-                gallery.innerHTML = '';
-                savedImages.forEach((src, idx) => addImageToGallery(src, idx, gallery));
-            } else {
-                savedImages2.splice(index, 1);
-                localStorage.setItem('savedImages2', JSON.stringify(savedImages2));
-                gallery.innerHTML = '';
-                savedImages2.forEach((src, idx) => addImageToGallery(src, idx, gallery));
-            }
+        function removeImageFromLocalStorage(imageSrc, storageKey) {
+            const savedImages = JSON.parse(localStorage.getItem(storageKey)) || [];
+            const filteredImages = savedImages.filter(src => src !== imageSrc);
+            localStorage.setItem(storageKey, JSON.stringify(filteredImages));
         }
     </script>
-
 </body>
 </html>
