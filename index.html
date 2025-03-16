@@ -47,7 +47,7 @@
         #gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Asegura que las imágenes se ajusten bien */
-            gap: 10px;
+            gap: 15px; /* Ajuste del espacio entre las imágenes */
             width: 100%;
             max-width: 800px;
             margin-top: 20px; /* Espacio entre las imágenes y el título */
@@ -55,7 +55,7 @@
         }
         .photo-container {
             position: relative;
-            border: 3px solid #ff69b4;
+            border: 5px solid #ff69b4; /* Marco rosa alrededor de cada foto */
             border-radius: 12px;
             padding: 0;
             overflow: hidden;
@@ -122,7 +122,7 @@
         #gallery2 {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
+            gap: 15px; /* Ajuste del espacio entre las imágenes */
             width: 100%;
             max-width: 800px;
             margin-top: 20px; /* Espacio entre el botón y las fotos */
@@ -135,16 +135,16 @@
     <input type="file" id="fileInput" accept="image/*" multiple>
     <div id="gallery">
         <!-- Enlaces de imágenes de la primera sección -->
-        <a href="https://imgur.com/Q5sIARB"><img src="https://i.imgur.com/Q5sIARBm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/zubECoZ"><img src="https://i.imgur.com/zubECoZt.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/S6nGHPK"><img src="https://i.imgur.com/S6nGHPKm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/YODCP4t"><img src="https://i.imgur.com/YODCP4tm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/J2BjxOG"><img src="https://i.imgur.com/J2BjxOGm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/KkRNJwN"><img src="https://i.imgur.com/KkRNJwNm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/DNYV7OO"><img src="https://i.imgur.com/DNYV7OOm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/qfFrgqy"><img src="https://i.imgur.com/qfFrgqym.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/tHFwB5J"><img src="https://i.imgur.com/tHFwB5Jm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/9Ea2vOR"><img src="https://i.imgur.com/9Ea2vORm.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/Q5sIARB" class="photo-container"><img src="https://i.imgur.com/Q5sIARBm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/zubECoZ" class="photo-container"><img src="https://i.imgur.com/zubECoZt.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/S6nGHPK" class="photo-container"><img src="https://i.imgur.com/S6nGHPKm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/YODCP4t" class="photo-container"><img src="https://i.imgur.com/YODCP4tm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/J2BjxOG" class="photo-container"><img src="https://i.imgur.com/J2BjxOGm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/KkRNJwN" class="photo-container"><img src="https://i.imgur.com/KkRNJwNm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/DNYV7OO" class="photo-container"><img src="https://i.imgur.com/DNYV7OOm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/qfFrgqy" class="photo-container"><img src="https://i.imgur.com/qfFrgqym.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/tHFwB5J" class="photo-container"><img src="https://i.imgur.com/tHFwB5Jm.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/9Ea2vOR" class="photo-container"><img src="https://i.imgur.com/9Ea2vORm.jpg" class="photo" title="source: imgur.com" /></a>
     </div>
 
     <div id="message">
@@ -157,12 +157,12 @@
     <!-- Separación entre el botón y la galería de imágenes -->
     <div id="gallery2">
         <!-- Enlaces de imágenes de la segunda sección -->
-        <a href="https://imgur.com/Y6Q3Yk4"><img src="https://i.imgur.com/Y6Q3Yk4.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/TLQr5MD"><img src="https://i.imgur.com/TLQr5MD.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/S2QOQUV"><img src="https://i.imgur.com/S2QOQUV.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/Ia0BoTg"><img src="https://i.imgur.com/Ia0BoTg.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/cVbisWu"><img src="https://i.imgur.com/cVbisWu.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/ix2SQMI"><img src="https://i.imgur.com/ix2SQMI.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/Y6Q3Yk4" class="photo-container"><img src="https://i.imgur.com/Y6Q3Yk4.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/TLQr5MD" class="photo-container"><img src="https://i.imgur.com/TLQr5MD.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/S2QOQUV" class="photo-container"><img src="https://i.imgur.com/S2QOQUV.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/Ia0BoTg" class="photo-container"><img src="https://i.imgur.com/Ia0BoTg.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/cVbisWu" class="photo-container"><img src="https://i.imgur.com/cVbisWu.jpg" class="photo" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/ix2SQMI" class="photo-container"><img src="https://i.imgur.com/ix2SQMI.jpg" class="photo" title="source: imgur.com" /></a>
     </div>
 
 </body>
