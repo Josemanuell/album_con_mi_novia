@@ -64,8 +64,9 @@
         }
         .photo {
             width: 100%;
-            height: auto;
-            max-width: 120px; /* Limitar el tamaño máximo de la imagen */
+            max-width: 100px; /* Limita el tamaño máximo de la imagen */
+            max-height: 100px; /* Limita el alto máximo de la imagen */
+            object-fit: cover; /* Asegura que las imágenes no se deformen */
             border-radius: 0;
         }
         .delete-btn {
@@ -165,20 +166,18 @@
         <a href="https://imgur.com/dPPlck3"><img src="https://i.imgur.com/dPPlck3.jpg" title="source: imgur.com" /></a>
         <a href="https://imgur.com/8yZdV7S"><img src="https://i.imgur.com/8yZdV7S.jpg" title="source: imgur.com" /></a>
         <a href="https://imgur.com/zh0Mr25"><img src="https://i.imgur.com/zh0Mr25.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/Vu7Twcm"><img src="https://i.imgur.com/Vu7Twcm.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/N6xj5Hh"><img src="https://i.imgur.com/N6xj5Hh.jpg" title="source: imgur.com" /></a>
-        <a href="https://imgur.com/U5kRfUv"><img src="https://i.imgur.com/U5kRfUv.jpg" title="source: imgur.com" /></a>
+        <a href="https://imgur.com/pzwRs3v"><img src="https://i.imgur.com/pzwRs3v.jpg" title="source: imgur.com" /></a>
     </div>
-
+    
     <script>
+        // Manejo de las imágenes guardadas en el almacenamiento local
         const fileInput = document.getElementById('fileInput');
-        const gallery = document.getElementById('gallery');
-
         const fileInput2 = document.getElementById('fileInput2');
+        const gallery = document.getElementById('gallery');
         const gallery2 = document.getElementById('gallery2');
 
-        // Cargar imágenes guardadas
-        document.addEventListener('DOMContentLoaded', () => {
+        // Cargar imágenes guardadas al cargar la página
+        window.addEventListener('load', function() {
             const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
             savedImages.forEach((src, index) => addImageToGallery(src, index, gallery));
 
