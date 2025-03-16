@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M ❤️ K 12-04-2024</title>
@@ -42,8 +41,8 @@
         }
         #gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
             width: 100%;
             max-width: 800px;
         }
@@ -51,13 +50,30 @@
             position: relative;
             border: 3px solid #ff69b4;
             border-radius: 12px;
-            padding: 0; /* Se eliminó el padding para que el borde se ajuste mejor */
+            padding: 0;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .photo {
             width: 100%;
             height: auto;
-            border-radius: 0; /* Se eliminó el borde redondeado de la imagen */
+            border-radius: 0;
+        }
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff69b4;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #ff4d83;
         }
     </style>
 </head>
@@ -73,7 +89,7 @@
         // Cargar imágenes guardadas
         document.addEventListener('DOMContentLoaded', () => {
             const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
-            savedImages.forEach(src => addImageToGallery(src));
+            savedImages.forEach((src, index) => addImageToGallery(src, index));
         });
 
         fileInput.addEventListener('change', (event) => {
@@ -86,20 +102,36 @@
                     const imgSrc = e.target.result;
                     savedImages.push(imgSrc);
                     localStorage.setItem('savedImages', JSON.stringify(savedImages));
-                    addImageToGallery(imgSrc);
+                    addImageToGallery(imgSrc, savedImages.length - 1);
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        function addImageToGallery(src) {
+        function addImageToGallery(src, index) {
             const container = document.createElement('div');
             container.className = 'photo-container';
             const img = document.createElement('img');
             img.src = src;
             img.className = 'photo';
+
+            // Crear botón para eliminar imagen
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerText = 'X';
+            deleteBtn.onclick = () => removeImage(index);
+
             container.appendChild(img);
+            container.appendChild(deleteBtn);
             gallery.appendChild(container);
+        }
+
+        function removeImage(index) {
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+            savedImages.splice(index, 1);
+            localStorage.setItem('savedImages', JSON.stringify(savedImages));
+            gallery.innerHTML = ''; // Limpiar galería
+            savedImages.forEach((src, idx) => addImageToGallery(src, idx)); // Volver a cargar las imágenes
         }
     </script>
 </body>
