@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="M ❤️ K">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M ❤️ K 12-04-2024</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f8ff;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff69b4;
+            position: relative;
+            display: inline-block;
+            padding: 10px 20px;
+            background: #ffdde1;
+            border-radius: 50px;
+        }
+        h1::before {
+            content: "❤️ ";
+        }
+        h1::after {
+            content: " ❤️";
+        }
+        #gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            width: 100%;
+            max-width: 800px;
+        }
+        .photo-container {
+            position: relative;
+            border: 5px solid #ff69b4;
+            border-radius: 12px;
+            padding: 5px;
+            background: url('https://i.imgur.com/hyO5b1l.png') no-repeat center center;
+            background-size: contain;
+        }
+        .photo {
+            width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>M ❤️ K 12-04-2024</h1>
+    <input type="file" id="fileInput" accept="image/*" multiple>
+    <div id="gallery"></div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const gallery = document.getElementById('gallery');
+
+        // Cargar imágenes guardadas
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+            savedImages.forEach(src => addImageToGallery(src));
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            const savedImages = JSON.parse(localStorage.getItem('savedImages')) || [];
+
+            for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgSrc = e.target.result;
+                    savedImages.push(imgSrc);
+                    localStorage.setItem('savedImages', JSON.stringify(savedImages));
+                    addImageToGallery(imgSrc);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function addImageToGallery(src) {
+            const container = document.createElement('div');
+            container.className = 'photo-container';
+            const img = document.createElement('img');
+            img.src = src;
+            img.className = 'photo';
+            container.appendChild(img);
+            gallery.appendChild(container);
+        }
+    </script>
+</body>
+</html>
