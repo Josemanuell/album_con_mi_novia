@@ -15,6 +15,7 @@
             padding: 20px;
             position: relative;
             overflow-y: auto; /* Permite desplazarse hacia abajo */
+            min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura */
         }
         body::before {
             content: "";
@@ -22,7 +23,7 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: url('https://i.imgur.com/hyO5b1l.png') repeat;
-            opacity: 0.05; /* Hacemos el fondo más transparente */
+            opacity: 0.1; /* Fondo más sutil */
             z-index: -1;
         }
         h1 {
